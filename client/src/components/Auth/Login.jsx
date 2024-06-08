@@ -46,7 +46,7 @@ import { BASE_URL } from "../../utils/vars";
           headers: {
             "Content-Type": "application/json",
           },
-          withCredentials: true // Include cookies in the request
+          withCredentials: true 
         };
         const { data } = await axios.post(`${BASE_URL}/api/users/login`, { email, password }, config);
         toast({
