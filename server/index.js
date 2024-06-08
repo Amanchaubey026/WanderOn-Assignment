@@ -12,7 +12,7 @@ const { productRouter } = require('./routes/product.routes');
 const PORT = process.env.PORT || 5000;
 
 // Allow requests from the origin where your frontend is hosted
-const allowedOrigin = 'https://wander-on-assignment.vercel.app/';
+const allowedOrigin = '*';
 
 app.use(cors({
   origin: allowedOrigin,
