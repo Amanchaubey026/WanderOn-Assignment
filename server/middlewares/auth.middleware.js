@@ -24,6 +24,7 @@ const auth = asyncHandler(async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    // console.log('Decoded User:', decoded.user); 
     req.user = decoded.user;
     next();
   } catch (err) {

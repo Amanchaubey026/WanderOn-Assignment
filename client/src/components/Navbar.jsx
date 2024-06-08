@@ -11,7 +11,7 @@ import {
     MenuButton,
     MenuList,
     MenuItem,
-    MenuDivider,
+    // MenuDivider,
     useDisclosure,
     useColorModeValue,
     Stack,
@@ -112,15 +112,15 @@ export default function Navbar() {
                                 <Avatar
                                     size={'sm'}
                                     src={
-                                        'https://avatars.githubusercontent.com/u/98681520?v=4'
+                                        'https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png'
                                     }
                                 />
                             </MenuButton>
                             <MenuList>
                                 <MenuItem>Link 1</MenuItem>
-                                <MenuItem>Link 2</MenuItem>
+                                {/* <MenuItem>Link 2</MenuItem>
                                 <MenuDivider />
-                                <MenuItem>Link 3</MenuItem>
+                                <MenuItem>Link 3</MenuItem> */}
                             </MenuList>
                         </Menu>
                     </Flex>
