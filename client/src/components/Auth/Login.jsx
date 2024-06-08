@@ -16,6 +16,7 @@ import {
   import { useNavigate } from 'react-router-dom';
   import Cookies from 'js-cookie';
 import { useAuth } from "../../context/AuthContext";
+import { BASE_URL } from "../../utils/vars";
   
   const Login = () => {
     const [show, setShow] = useState(false);
@@ -47,7 +48,7 @@ import { useAuth } from "../../context/AuthContext";
           },
           withCredentials: true // Include cookies in the request
         };
-        const { data } = await axios.post("https://wanderon-assignment-1.onrender.com/api/users/login", { email, password }, config);
+        const { data } = await axios.post(`${BASE_URL}/api/users/login`, { email, password }, config);
         toast({
           title: 'Login Successful!',
           status: 'success',

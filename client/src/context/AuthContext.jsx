@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { BASE_URL } from '../utils/vars';
 
 const AuthContext = createContext();
 
@@ -27,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
             console.log('AuthToken:', authToken);
 
-            await axios.post('https://wanderon-assignment-1.onrender.com/api/users/logout', {}, {
+            await axios.post(`${BASE_URL}/api/users/logout`, {}, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },

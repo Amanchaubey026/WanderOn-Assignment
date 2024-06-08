@@ -6,6 +6,13 @@ const { validationResult } = require('express-validator');
 const Blacklist = require("../models/blacklist.schema"); 
 require('dotenv').config();
 
+const cookieOptions = {
+  httpOnly: true,
+  expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1 day
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+};
+
 const registerUser = asyncHandler(async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -70,7 +77,7 @@ const authUser = asyncHandler(async (req, res) => {
       (err, token) => {
         if (err) throw err;
         req.session.userId = user.id; 
-        res.cookie('token', token, { httpOnly: true });
+        res.cookie('token', token, cookieOptions);
         res.json({ token });
       }
     );
@@ -90,7 +97,7 @@ const logoutUser = asyncHandler(async (req, res) => {
         if (err) {
           return res.status(500).json({ msg: 'Unable to log out' });
         } else {
-          res.clearCookie('token');
+          res.clearCookie('token', cookieOptions);
           res.status(200).json({ msg: 'Logged out successfully' });
         }
       });

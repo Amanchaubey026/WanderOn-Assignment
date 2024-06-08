@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../utils/vars';
 // import Cookies from 'js-cookie';
 
 const SignUp = () => {
@@ -98,7 +99,7 @@ const SignUp = () => {
         }
       };
       const payload = { username, email, password, pic };
-      await axios.post("https://wanderon-assignment-1.onrender.com/api/users/signup", payload, config);
+      await axios.post(`${BASE_URL}/api/users/signup`, payload, config);
       toast({
         title: 'Registration Successful!',
         status: 'success',

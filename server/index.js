@@ -12,10 +12,9 @@ const { productRouter } = require('./routes/product.routes');
 const PORT = process.env.PORT || 5000;
 
 // Allow requests from the origin where your frontend is hosted
-const allowedOrigin = '*';
 
 app.use(cors({
-  origin: allowedOrigin,
+  origin: process.env.FRONTEND_URL,
   methods: ['GET', 'POST'],
   credentials: true
 }));
