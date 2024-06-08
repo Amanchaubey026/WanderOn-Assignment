@@ -12,7 +12,7 @@ const { productRouter } = require('./routes/product.routes');
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: 'http://localhost:5174',
+  origin: 'https://wander-on-assignment.vercel.app/',
   methods: ['GET', 'POST'],
   credentials: true
 }));

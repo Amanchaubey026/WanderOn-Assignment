@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
 
             console.log('AuthToken:', authToken);
 
-            await axios.post('http://localhost:5000/api/users/logout', {}, {
+            await axios.post('https://wanderon-assignment-1.onrender.com/api/users/logout', {}, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },

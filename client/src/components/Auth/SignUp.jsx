@@ -98,7 +98,7 @@ const SignUp = () => {
         }
       };
       const payload = { username, email, password, pic };
-      await axios.post("http://localhost:5000/api/users/signup", payload, config);
+      await axios.post("https://wanderon-assignment-1.onrender.com/api/users/signup", payload, config);
       toast({
         title: 'Registration Successful!',
         status: 'success',
