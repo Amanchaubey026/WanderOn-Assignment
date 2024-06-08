@@ -69,7 +69,7 @@ const authUser = asyncHandler(async (req, res) => {
       { expiresIn: '4h' },
       (err, token) => {
         if (err) throw err;
-        req.session.userId = user.id;  // Set the session userId
+        req.session.userId = user.id; 
         res.cookie('token', token, { httpOnly: true });
         res.json({ token });
       }

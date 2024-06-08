@@ -1,9 +1,4 @@
-
-
-// SignUp
-/* eslint-disable no-unused-vars */
-// import React from 'react'
-import { useToast } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react';
 import {
   Button,
   FormControl,
@@ -16,15 +11,15 @@ import {
 import { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
 const SignUp = () => {
   const [show, setShow] = useState(false);
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
-  const [picture, setPicture] = useState();
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [pic, setPic] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
@@ -52,8 +47,7 @@ const SignUp = () => {
         body: data
       }).then((res) => res.json())
         .then((data) => {
-          setPicture(data.url.toString());
-          console.log(data.url.toString());
+          setPic(data.url.toString());
           setLoading(false);
         }).catch((error) => {
           console.log(error);
@@ -74,7 +68,7 @@ const SignUp = () => {
 
   const submitHandler = async () => {
     setLoading(true);
-    if (!name || !email || !password || !confirmPassword) {
+    if (!username || !email || !password || !confirmPassword) {
       toast({
         title: 'Please Fill all the Fields!',
         status: 'warning',
@@ -96,14 +90,15 @@ const SignUp = () => {
       setLoading(false);
       return;
     }
-
+  
     try {
       const config = {
         headers: {
           "Content-Type": "application/json",
         }
       };
-      const { data } = await axios.post("http://localhost:5000/api/users/signup", { name, email, password, picture }, config);
+      const payload = { username, email, password, pic };
+      await axios.post("http://localhost:5000/api/users/signup", payload, config);
       toast({
         title: 'Registration Successful!',
         status: 'success',
@@ -111,14 +106,13 @@ const SignUp = () => {
         isClosable: true,
         position: "bottom"
       });
-      Cookies.set('userInfo', JSON.stringify(data), { expires: 1 });
       setLoading(false);
-      navigate("/login");
+      navigate("/auth");
     } catch (error) {
-      console.log(error);
+      console.log('Error details:', error.response.data);
       toast({
         title: 'Error Occurred!',
-        description: error.response.data.message,
+        description: error.response.data.errors?.map(e => e.msg).join(', ') || 'An unknown error occurred.',
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -127,6 +121,7 @@ const SignUp = () => {
       setLoading(false);
     }
   };
+  
 
   return (
     <VStack spacing={"5px"} color={"black"}>
@@ -134,7 +129,7 @@ const SignUp = () => {
         <FormLabel>Name</FormLabel>
         <Input
           placeholder="Enter your name"
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
         />
       </FormControl>
       <FormControl id="email" isRequired>
@@ -175,7 +170,6 @@ const SignUp = () => {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-
       <FormControl id="picture">
         <FormLabel>Upload your Picture</FormLabel>
         <Input

@@ -13,7 +13,7 @@ import {
     Text,
   } from "@chakra-ui/react";
   import { useNavigate } from "react-router-dom";
-  import  Cookies  from 'js-cookie'; // Import Cookies from js-cookie
+  import  Cookies  from 'js-cookie'; 
   import Login from "../components/Auth/Login";
   import SignUp from "../components/Auth/SignUp";
   import { useEffect } from "react";
@@ -58,10 +58,10 @@ import {
             </TabList>
             <TabPanels>
               <TabPanel>
-                <Login /> {/* Render the Login component */}
+                <Login /> 
               </TabPanel>
               <TabPanel>
-                <SignUp /> {/* Render the SignUp component */}
+                <SignUp /> 
               </TabPanel>
             </TabPanels>
           </Tabs>

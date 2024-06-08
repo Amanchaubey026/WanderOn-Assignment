@@ -15,6 +15,7 @@ import {
   import axios from 'axios';
   import { useNavigate } from 'react-router-dom';
   import Cookies from 'js-cookie';
+import { useAuth } from "../../context/AuthContext";
   
   const Login = () => {
     const [show, setShow] = useState(false);
@@ -23,6 +24,7 @@ import {
     const [loading, setLoading] = useState(false);
     const toast = useToast();
     const navigate = useNavigate();
+    const { setIsLoggedIn } = useAuth();
   
     async function submitHandler() {
       setLoading(true);
@@ -37,12 +39,13 @@ import {
         setLoading(false);
         return;
       }
-  
+    
       try {
         const config = {
           headers: {
             "Content-Type": "application/json",
-          }
+          },
+          withCredentials: true // Include cookies in the request
         };
         const { data } = await axios.post("http://localhost:5000/api/users/login", { email, password }, config);
         toast({
@@ -55,6 +58,7 @@ import {
         Cookies.set('userInfo', JSON.stringify(data), { expires: 1 });
         setLoading(false);
         navigate("/products");
+        setIsLoggedIn(true)
       } catch (error) {
         console.log(error);
         toast({
@@ -68,6 +72,7 @@ import {
         setLoading(false);
       }
     }
+    
   
     return (
       <VStack spacing={"5px"} color={"black"}>

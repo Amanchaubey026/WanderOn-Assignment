@@ -7,10 +7,17 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import video from '../assets/video.mp4';
-
+import { useNavigate } from 'react-router-dom';
 export default function Homepage() {
+  const navigate = useNavigate();
   const direction = useBreakpointValue({ base: 'column-reverse', md: 'row' });
+  const handleLoginClick = () => {
+    navigate('/auth');
+  };
 
+  const handleSignUpClick = () => {
+    navigate('/auth');
+  };
   return (
     <Stack minH={'100vh'} direction={direction}>
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
@@ -45,13 +52,14 @@ export default function Homepage() {
               rounded={'full'}
               bg={'blue.400'}
               color={'white'}
+              onClick={handleLoginClick}
               _hover={{
                 bg: 'blue.500',
               }}
             >
               Login
             </Button>
-            <Button rounded={'full'}>SignUp</Button>
+            <Button onClick={handleSignUpClick} rounded={'full'}>SignUp</Button>
           </Stack>
         </Stack>
       </Flex>
