@@ -11,11 +11,15 @@ const { notFound, errorHandler } = require('./middlewares/errorHandler.middlewar
 const { productRouter } = require('./routes/product.routes');
 const PORT = process.env.PORT || 5000;
 
+// Allow requests from the origin where your frontend is hosted
+const allowedOrigin = 'https://wander-on-assignment.vercel.app/';
+
 app.use(cors({
-  origin: 'https://wander-on-assignment.vercel.app/',
+  origin: allowedOrigin,
   methods: ['GET', 'POST'],
   credentials: true
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -32,7 +36,6 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
-
 
 // Error handling middlewares
 app.use(notFound);
