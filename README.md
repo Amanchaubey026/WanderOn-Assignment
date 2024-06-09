@@ -106,7 +106,7 @@ Backend: https://wanderon-assignment-1.onrender.com
 Detailed instructions on how to install, configure, and get the project running.
 
 ```bash
-git clone https://github.com/Amanchaubey026/WanderOn-Assignment/tree/main
+git clone https://github.com/Amanchaubey026/WanderOn-Assignment.git
 
 ### To get inside FrontEnd directory
 cd client
