@@ -1,7 +1,8 @@
 # Secure User Authentication System
 ## Introduction
 
-FashionFusion is designed to provide a seamless and enjoyable shopping experience for fashion enthusiasts. From trendy apparel to chic accessories, FashionFusion brings the latest styles to your fingertips. This project not only showcases a visually appealing user interface but also incorporates essential features for a complete e-commerce solution.
+A secure user authentication system uses MongoDB for data storage, bcrypt for password hashing, and JWTs for session management. During registration, passwords are hashed using bcrypt, making them difficult to crack. Server-side data validation and input sanitization prevent vulnerabilities like XSS and SQL injection by ensuring inputs meet criteria and are cleansed of harmful content.
+During login, user credentials are verified against hashed passwords. Upon successful authentication, a JWT is generated and sent to the client, used to authenticate further requests. JWTs are stateless and easily validated, ensuring only authorized access to protected resources. This system ensures robust security and efficient user session management.
 
 ## Project Type
 
@@ -9,9 +10,9 @@ Frontend
 
 ## Deplolyed App
 
-Frontend: https://fashionfusion04.netlify.app/
+Frontend: https://wander-on-assignment.vercel.app/
 
-Backend: https://mock-server-app-1.onrender.com/
+Backend: https://wanderon-assignment-1.onrender.com
 
 ## Directory Structure
 ```
@@ -79,18 +80,21 @@ Backend: https://mock-server-app-1.onrender.com/
 
 
 ## Features
-  Intuitive User Interface: A clean and user-friendly interface to enhance the browsing and shopping experience.
+  Secure User Registration: User passwords are hashed using bcrypt during registration, ensuring they are difficult to crack and enhancing security.
    
-  User Authentication: Secure user registration and login.
+  Login Authentication: Verifies user credentials against hashed passwords, ensuring only valid users gain access.
 
-  Product Catalog: Explore a diverse range of fashion items conveniently categorized for easy navigation.
+  JWT Session Management: Generates a JWT upon successful login, which is used to authenticate subsequent requests without server-side session storage.
 
-  Shopping Cart: Effortlessly add and manage your favorite items with an interactive shopping cart.
+  Server-side Data Validation: Ensures inputs meet predefined criteria, preventing malformed or malicious data from being processed.
+
+  MongoDB Data Storage: Utilizes a flexible and scalable NoSQL database for efficient data management and retrieval.
+
+  Stateless Authentication: JWTs provide a scalable solution for maintaining user sessions, ensuring only authorized access to protected resources.
+
+  Robust Security: Combines bcrypt hashing, JWTs, data validation, and sanitization to offer a secure user authentication system.
  
   Responsive Design: Enjoy a consistent and visually appealing experience across various devices.
-
-- User Profiles: Guests can create profiles and see exclusive collection.
-- Admin Profile: Admin can handle Server Data
 
 ## test credentials
   <p>login: test3@example.com</p>
