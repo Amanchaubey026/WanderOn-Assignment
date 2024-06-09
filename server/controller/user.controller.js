@@ -78,7 +78,8 @@ const authUser = asyncHandler(async (req, res) => {
         if (err) throw err;
         req.session.userId = user.id; 
         res.cookie('token', token, cookieOptions);
-        res.json({ token });
+        res.json({ token});
+        // res.json({ token,pic:user.pic,name:user.username,email:user.email});
       }
     );
   } catch (err) {

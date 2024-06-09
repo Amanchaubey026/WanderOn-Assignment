@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
                 throw new Error('No auth token found in user info');
             }
 
-            console.log('AuthToken:', authToken);
+            // console.log('AuthToken:', authToken);
 
             await axios.post(`${BASE_URL}/api/users/logout`, {}, {
                 headers: {

@@ -57,6 +57,8 @@ import { BASE_URL } from "../../utils/vars";
           position: "bottom"
         });
         Cookies.set('userInfo', JSON.stringify(data), { expires: 1 });
+        // Cookies.set('userDetails', JSON.stringify(data), { expires: 1 });
+        // console.log(data);
         setLoading(false);
         navigate("/products");
         setIsLoggedIn(true)
