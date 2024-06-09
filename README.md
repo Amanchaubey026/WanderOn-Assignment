@@ -6,7 +6,7 @@ During login, user credentials are verified against hashed passwords. Upon succe
 
 ## Project Type
 
-Frontend
+Frontend | Backend | FullStack
 
 ## Deplolyed App
 
