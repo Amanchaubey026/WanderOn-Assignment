@@ -57,7 +57,7 @@ const Login = () => {
       });
       Cookies.set('userInfo', data.token, { expires: 1 });
       console.log(data);
-      localStorage.setItem('userDetails',JSON.stringify(data));
+      localStorage.setItem('userDetails',JSON.stringify(data))
       setLoading(false);
       setEmail('');
       setPassword('');

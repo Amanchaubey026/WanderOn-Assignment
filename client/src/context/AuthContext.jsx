@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
@@ -12,20 +12,19 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get('userInfo'));
     const navigate = useNavigate();
-    const [userDetails, setUserDetails] = useState(() => {
-        const storedDetails = localStorage.getItem('userDetails');
-        return storedDetails ? JSON.parse(storedDetails) : null;
-    });
-
+    
     useEffect(() => {
-        if (isLoggedIn && !userDetails) {
-            const storedDetails = localStorage.getItem('userDetails');
-            if (storedDetails) {
-                setUserDetails(JSON.parse(storedDetails));
-            }
-        }
-    }, [isLoggedIn, userDetails]);
+        const checkAuth = () => {
+            const authToken = Cookies.get('userInfo');
+            setIsLoggedIn(!!authToken);
+        };
 
+        window.addEventListener('storage', checkAuth);
+
+        return () => {
+            window.removeEventListener('storage', checkAuth);
+        };
+    }, []);
 
     const logout = async () => {
         try {
@@ -51,7 +50,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn,userDetails, logout }}>
+        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, logout }}>
             {children}
         </AuthContext.Provider>
     );
