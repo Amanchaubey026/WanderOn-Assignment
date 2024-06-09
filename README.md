@@ -135,7 +135,8 @@ npm run server
 ```
 
 ## Snapshot of Website
-<br/>
+
+
 ![sample3](https://github.com/Amanchaubey026/WanderOn-Assignment/assets/98681520/d13da9f9-6ebc-4d66-9b8a-c0c9b972e095)
 
 ![image](https://github.com/Amanchaubey026/WanderOn-Assignment/assets/98681520/c40725d0-88b2-43cb-a209-7d518296ca34)
