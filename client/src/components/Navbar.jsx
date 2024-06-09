@@ -11,16 +11,16 @@ import {
     MenuButton,
     MenuList,
     MenuItem,
-    // MenuDivider,
     useDisclosure,
     useColorModeValue,
     Stack,
     Image,
     useToast,
   } from "@chakra-ui/react";
-  import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+  import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
   import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
   import { useAuth } from "../context/AuthContext";
+import ProfileModal from "./miscellaneous/ProfileModal";
   
   const Links = [
     { name: "Home", path: "/" },
@@ -53,7 +53,7 @@ import {
   
   export default function Navbar() {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { isLoggedIn, logout } = useAuth();
+    const { isLoggedIn, logout ,userDetails} = useAuth();
     const navigate = useNavigate()
     const toast = useToast();
   
@@ -81,7 +81,7 @@ import {
       }
       navigate('/auth');
     };
-  
+    console.log(userDetails);
     return (
       <>
         <Box
@@ -131,27 +131,16 @@ import {
                 </Button>
               )}
               <Menu>
-                <MenuButton
-                  as={Button}
-                  rounded={"full"}
-                  variant={"link"}
-                  cursor={"pointer"}
-                  minW={0}
-                >
-                  <Avatar
-                    size={"sm"}
-                    src={
-                      "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png"
-                    }
-                  />
+                <MenuButton as={Button} rightIcon={<ChevronDownIcon/>}>
+                    <Avatar size={'sm'} cursor={'pointer'}  src={isLoggedIn?userDetails.pic:"https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png"}/>
                 </MenuButton>
-                <MenuList>
-                  <MenuItem>Link 1</MenuItem>
-                  {/* <MenuItem>Link 2</MenuItem>
-                                  <MenuDivider />
-                                  <MenuItem>Link 3</MenuItem> */}
+                <MenuList>{
+                  isLoggedIn&&
+                    <ProfileModal user={userDetails}>
+                    <MenuItem>My Profile</MenuItem>
+                    </ProfileModal>}
                 </MenuList>
-              </Menu>
+            </Menu>
             </Flex>
           </Flex>
   

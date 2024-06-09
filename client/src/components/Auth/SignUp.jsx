@@ -108,6 +108,11 @@ const SignUp = () => {
         position: "bottom"
       });
       setLoading(false);
+      setUsername('');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+      setPic('');
       navigate("/auth");
     } catch (error) {
       console.log('Error details:', error.response.data);
@@ -130,6 +135,7 @@ const SignUp = () => {
         <FormLabel>Name</FormLabel>
         <Input
           placeholder="Enter your name"
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
       </FormControl>
@@ -138,6 +144,7 @@ const SignUp = () => {
         <Input
           type="email"
           placeholder="Enter your email"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
       </FormControl>
@@ -147,6 +154,7 @@ const SignUp = () => {
           <Input
             type={show ? "text" : "password"}
             placeholder="Enter your password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <InputRightElement w={"4.5rem"}>
@@ -162,6 +170,7 @@ const SignUp = () => {
           <Input
             type={show ? "text" : "password"}
             placeholder="Confirm password"
+            value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <InputRightElement w={"4.5rem"}>

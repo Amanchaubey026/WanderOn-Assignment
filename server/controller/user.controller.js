@@ -65,8 +65,7 @@ const authUser = asyncHandler(async (req, res) => {
 
     const payload = {
       user: {
-        id: user.id,
-        pic: user.pic
+        id: user.id
       }
     };
 
@@ -78,8 +77,9 @@ const authUser = asyncHandler(async (req, res) => {
         if (err) throw err;
         req.session.userId = user.id; 
         res.cookie('token', token, cookieOptions);
-        res.json({ token});
-        // res.json({ token,pic:user.pic,name:user.username,email:user.email});
+        // res.json({ token});
+        console.log(user);
+        res.json({ token,pic:user.pic,email:user.email});
       }
     );
   } catch (err) {

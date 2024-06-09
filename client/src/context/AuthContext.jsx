@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
@@ -12,21 +12,27 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get('userInfo'));
     const navigate = useNavigate();
+    const [userDetails, setUserDetails] = useState(() => {
+        const storedDetails = localStorage.getItem('userDetails');
+        return storedDetails ? JSON.parse(storedDetails) : null;
+    });
+
+    useEffect(() => {
+        if (isLoggedIn && !userDetails) {
+            const storedDetails = localStorage.getItem('userDetails');
+            if (storedDetails) {
+                setUserDetails(JSON.parse(storedDetails));
+            }
+        }
+    }, [isLoggedIn, userDetails]);
+
 
     const logout = async () => {
         try {
-            const userInfoCookie = Cookies.get('userInfo');
-            if (!userInfoCookie) {
-                throw new Error('No user info cookie found');
-            }
-
-            const userInfo = JSON.parse(userInfoCookie);
-            const authToken = userInfo.token;
+            const authToken = Cookies.get('userInfo');
             if (!authToken) {
-                throw new Error('No auth token found in user info');
+                throw new Error('No auth token found');
             }
-
-            // console.log('AuthToken:', authToken);
 
             await axios.post(`${BASE_URL}/api/users/logout`, {}, {
                 headers: {
@@ -36,6 +42,7 @@ export const AuthProvider = ({ children }) => {
             });
 
             Cookies.remove('userInfo');
+            localStorage.removeItem('userDetails');
             setIsLoggedIn(false);
             navigate('/');
         } catch (error) {
@@ -44,7 +51,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, logout }}>
+        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn,userDetails, logout }}>
             {children}
         </AuthContext.Provider>
     );
